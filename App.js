@@ -1,7 +1,8 @@
-import { FlatList, ScrollView, StyleSheet, Text, View, SectionList } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, SectionList, TextInput, Button } from 'react-native';
 import AppHeader from './AppHeader';
 import AppFooter from './AppFooter';
-import Login from './Login';
+
 
 const allVehicles = [ 
   {
@@ -59,41 +60,61 @@ const allVehicles = [
 ]
 
 export default function App() {
+  const heading = 'Baham (باہم)';
+  const slogan = 'Connecting People, Connecting Lives';
 
-// Render the headers of section. Note that the input prop is section and we're using 'type' attribute inside
-const renderSectionHeader = ({ section }) => {
-  return (<Text>{section.type}</Text>);
-};
+  const [feedback, setFeedback] = useState('');
 
-// Render each menu item
-const renderVehicleModelItem = ({ item }) => {
-  return (
-    <View>
-      <Text>{item.name} ({item.capacity})</Text>
-    </View>
-  );
-}  
-  
-// Separator separates items. We're only using an empty view with border for now
-const itemSeparatorComponent = () => <View style={{ borderColor: 'black', borderStyle: "dotted", borderWidth: 1 }}></View>;
+  const handleFeedbackChange = (text) => {
+    setFeedback(text);
+  };
 
-  return (
-    // Demo: Section List
-    <View style={styles.container}>
-      {/* Attach header component */}
-      <AppHeader />
-      <Login />
-      <View style={styles.mainContainer}>
-        <SectionList 
-        sections={allVehicles}
-        renderItem={renderVehicleModelItem}
-        renderSectionHeader={renderSectionHeader}
-        ItemSeparatorComponent={itemSeparatorComponent}
-        keyExtractor={(item, index) => item.id * (item.id + index)}
-        />
+  const handleSubmit = () => {
+    console.log(feedback);
+  };
+
+  const renderSectionHeader = ({ section }) => {
+    return <Text>{section.type}</Text>;
+  };
+
+  const renderVehicleModelItem = ({ item }) => {
+    return (
+      <View>
+        <Text>
+          {item.name} ({item.capacity})
+        </Text>
       </View>
-      {/* Attach footer component */}
-      <AppFooter />
+    );
+  };
+
+  const itemSeparatorComponent = () => <View style={styles.separator}></View>;
+
+  return (
+    <View style={styles.container}>
+      <AppHeader heading={heading} />
+     
+      <View style={styles.mainContainer}>
+        <SectionList
+          sections={allVehicles}
+          renderItem={renderVehicleModelItem}
+          renderSectionHeader={renderSectionHeader}
+          ItemSeparatorComponent={itemSeparatorComponent}
+          keyExtractor={(item, index) => item.id * (item.id + index)}
+        />
+        <TextInput
+          style={styles.textInput}
+        
+      style={{ fontFamily: 'Arial', fontSize: 20, fontWeight: 'bold', color: 'blue',textAlign: 'center'}}        
+          multiline
+          placeholder="Enter your feedback"
+          value={feedback}
+          onChangeText={handleFeedbackChange}
+        />
+        <Button title="Submit" onPress={handleSubmit}
+        style={{ fontFamily: 'Arial', fontSize: 20, fontWeight: 'bold', color: 'blue',textAlign: 'center'}}
+         />
+      </View>
+      <AppFooter slogan={slogan} />
     </View>
   );
 }
@@ -102,16 +123,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
-    backgroundColor: 'gold'
+    backgroundColor: 'blue',
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
-  menuItem: {
-    textAlign: 'center',
-    margin: 12,
-    fontSize: 16,
-    color: 'maroon'
-  }
+  separator: {
+    borderColor: 'grey',
+    borderStyle: 'dotted',
+    borderWidth: 1,
+  },
+  textInput: {
+    height: 100,
+    margin: 10,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: 'black',
+  },
 });
