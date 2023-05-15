@@ -10,7 +10,7 @@ const allVehicles = [
       {'id': 1, 'name': "Honda City", 'capacity': 4 }, 
       {'id': 2, 'name': "Honda Civic", 'capacity': 4 }, 
       {'id': 3, 'name': "Honda Accord", 'capacity': 5 }, 
-      {'id': 4, 'name': "Toyota Corolla", 'capacity': 4 }, 
+      {'id': 4, 'name': "Toyota Corolla", 'acapacity': 4 }, 
       {'id': 5, 'name': "Toyota Camry", 'capacity': 4 }, 
       {'id': 6, 'name': "Toyota Prius", 'capacity': 4 }, 
     ],
