@@ -57,6 +57,15 @@ const allVehicles = [
     ]
   }
 ]
+const foother =(footerText, sloganText) => {
+ <View style={styles.container}>
+            <Text sylte={styles.footer}>{footerText} 
+                <Text style={{fontStyle: 'italic'}}>{sloganText}</Text>
+            </Text>
+        </View>
+}
+const header =()=>{
+}
 
 export default function App() {
 
@@ -93,7 +102,7 @@ const itemSeparatorComponent = () => <View style={{ borderColor: 'black', border
         />
       </View>
       {/* Attach footer component */}
-      <AppFooter />
+      <footer />
     </View>
   );
 }
